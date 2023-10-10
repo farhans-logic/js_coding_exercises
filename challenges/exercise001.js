@@ -6,20 +6,24 @@
 
 export function capitalize(word) {
 	if (word === undefined) throw new Error('word is required');
-	// Add your code here!
+	const firstLetter = word.charAt(0);
+	const upperCaseFirstLetter = firstLetter.toUpperCase();
+	return upperCaseFirstLetter + word.slice(1);
 }
 
 export function generateInitials(firstName, lastName) {
 	if (firstName === undefined) throw new Error('firstName is required');
 	if (lastName === undefined) throw new Error('lastName is required');
-	// Add your code here!
-}
+	const firstNameInitial = firstName[0];
+	const lastNameInitial = lastName[0];
+	return `${firstNameInitial}.${lastNameInitial}`;}
 
 export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is requied');
 	if (vatRate === undefined) throw new Error('vatRate is required');
-	// Add your code here!
+	const vatAmount = originalPrice * vatRate;
+	return originalPrice + vatAmount;
 }
 
 export function getSalePrice(originalPrice, reduction) {
