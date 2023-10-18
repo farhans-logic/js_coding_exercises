@@ -12,6 +12,13 @@
  */
 export const sumMultiples = (arr) => {
 	if (arr === undefined) throw new Error('arr is required');
+
+	return arr.reduce((sum, num) => {
+		if (num % 3 === 0 || num % 5 === 0) {
+			return sum + num;
+		}
+		return sum;
+	}, 0);
 };
 
 /**
@@ -21,6 +28,9 @@ export const sumMultiples = (arr) => {
  */
 export const isValidDNA = (str) => {
 	if (str === undefined) throw new Error('str is required');
+
+	const validChars = 'CGTA';
+	return [...str].every(char => validChars.includes(char));
 };
 
 /**
@@ -30,6 +40,9 @@ export const isValidDNA = (str) => {
  */
 export const getComplementaryDNA = (str) => {
 	if (str === undefined) throw new Error('str is required');
+
+	const pairs = { 'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C' };
+	return [...str].map(char => pairs[char]).join('');
 };
 
 /**
@@ -39,6 +52,18 @@ export const getComplementaryDNA = (str) => {
  */
 export const isItPrime = (n) => {
 	if (n === undefined) throw new Error('n is required');
+
+	if (n <= 1) {
+		return false;
+	}
+
+	for (let i = 2; i <= Math.sqrt(n); i++) {
+		if (n % i === 0) {
+			return false;
+		}
+	}
+
+	return true;
 };
 
 /**
@@ -55,6 +80,8 @@ export const isItPrime = (n) => {
 export const createMatrix = (n, fill) => {
 	if (n === undefined) throw new Error('n is required');
 	if (fill === undefined) throw new Error('fill is required');
+
+	return Array.from({ length: n }, () => Array(n).fill(fill));
 };
 
 /**
@@ -72,4 +99,10 @@ export const createMatrix = (n, fill) => {
 export const areWeCovered = (staff, day) => {
 	if (staff === undefined) throw new Error('staff is required');
 	if (day === undefined) throw new Error('day is required');
+
+	const staffCount = staff.reduce((count, person) => {
+		return person.rota.includes(day) ? count + 1 : count;
+	}, 0);
+
+	return staffCount >= 3;
 };
